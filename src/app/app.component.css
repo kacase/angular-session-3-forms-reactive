@@ -1,0 +1,39 @@
+p {
+}
+
+.exercise {
+  padding: 10px;
+  background-color: rgba(57, 163, 212, 0.534);
+  border-radius: 10px;
+}
+
+form div {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  margin: 10px;
+}
+
+form {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.special-offer {
+  background-color: orange;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+input {
+  height: 1.5em;
+}

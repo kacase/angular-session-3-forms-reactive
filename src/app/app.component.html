@@ -1,0 +1,71 @@
+<h1>3 | Forms</h1>
+<!-- Section 1 -->
+
+<h2>Template-Driven Forms</h2>
+
+<!-- Exercise 1 -->
+<h3>Excercise 1</h3>
+<p>
+	In this example we want to take a look at a <em>reactive</em> form. Contrary
+	to <em>template-driven forms</em>, reactive forms are driven by a model,
+	rather than the template itself. This allows much more control over the data
+	and how it's validated.
+</p>
+
+<ol>
+	<li>
+		Again we need to start by importing and injecting a module &mdash; this time
+		the <code>ReactiveFormsModule</code> into our app. Head over to the
+		<code>app.module.ts</code> and uncomment the necessary lines there.
+	</li>
+	<li>
+		<button (click)="prefillAddress()">prefill address</button>
+	</li>
+</ol>
+
+<!-- Insert Answer for Exercise 1.1 -->
+<div class="exercise">
+	<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+		<div>First Name:</div>
+		<input type="text" formControlName="firstName" />
+
+		<div>Last Name:</div>
+		<input type="text" formControlName="lastName" />
+
+
+		<div formGroupName="address">
+			<h3>Address</h3>
+			<span></span> <span></span> <span></span>
+
+			<div>Street:</div>
+			<input type="text" formControlName="street" />
+
+
+			<div>City:</div>
+			<input type="text" formControlName="city" />
+
+			<div>State:</div>
+			<input type="text" formControlName="state" />
+
+
+			<div>Zip Code:</div>
+			<input type="text" formControlName="zip" />
+		</div>
+
+			<div formArrayName="aliases">
+				<h3>Aliases</h3>
+				<button type="button" (click)="addAlias()">Add Alias</button>
+				<div *ngFor="let alias of aliases.controls; let i=index">
+					<span>Alias:</span>
+					<input type="text" [formControlName]="i" />
+
+    </div>
+
+				</div>
+
+				<div>
+					<span>Form Status: {{ profileForm.status }}</span>
+					<button type="submit" [disabled]="!profileForm.valid">Submit form</button>
+				</div>
+	</form>
+</div>

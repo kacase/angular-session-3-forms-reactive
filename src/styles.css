@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+
+body {
+  background-color: #1f2d42;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #e9474f;
+}
+
+a {
+  color: #4ec9b0;
+}
+
+button {
+  background-color: #d16969;
+  color: white;
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+code {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.3em;
+  color: #4ec9b0;
+  border-radius: 0.4em;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}
