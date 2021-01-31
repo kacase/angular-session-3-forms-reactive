@@ -6,66 +6,160 @@
 <!-- Exercise 1 -->
 <h3>Excercise 1</h3>
 <p>
-	In this example we want to take a look at a <em>reactive</em> form. Contrary
-	to <em>template-driven forms</em>, reactive forms are driven by a model,
-	rather than the template itself. This allows much more control over the data
-	and how it's validated.
+  In this example we want to take a look at a <em>reactive</em> form. Contrary
+  to <em>template-driven forms</em>, reactive forms are driven by a model,
+  rather than the template itself. This allows much more control over the data
+  and how it's validated. We already set up some basic functionality you had to
+  implement for template-driven forms for your convenience.
 </p>
 
 <ol>
-	<li>
-		Again we need to start by importing and injecting a module &mdash; this time
-		the <code>ReactiveFormsModule</code> into our app. Head over to the
-		<code>app.module.ts</code> and uncomment the necessary lines there.
-	</li>
-	<li>
-		<button (click)="prefillAddress()">prefill address</button>
-	</li>
+  <li>
+    Again we need to start by importing and injecting a module &mdash; this time
+    the <code>ReactiveFormsModule</code> into our app. Head over to the
+    <code>app.module.ts</code> and uncomment the necessary lines there.
+  </li>
+  <li>
+    Now inject the FormBuilder into the <code>app.component.ts</code> by first
+    importing it and then adding it to the constructor. You might find some code
+    there already that you can use.
+  </li>
+  <li>
+    We should now define our <code>FormGroup</code>. Use the FormBuilder to
+    define a form group with first and lastname as well as a nested form group
+    for the address. You can use the commented-out formBuilder instructions
+    already present.
+  </li>
+  <li>
+    With the formGroup defined, we can now let angular know which elements in
+    the template should be bound to which elements in the form. In order to do
+    so you first need to add <code>[formGroup]="profileForm"</code> to the
+    <code>form</code> element itself. Then you can bind the
+    <code>formControlName</code> e.g.
+    <code> formControlName="firstName"</code> directly to the
+    <code>input</code> elements. The only link missing is then the nested form
+    group for the address. Add <code>formGroupName="address"</code> to the
+    <code>div</code> which wraps around all address elements.
+  </li>
+  <li>
+    Now everything is linked, we can implement a function that prefills the
+    address of our form. Head over to the <code>app.component.ts</code> to
+    implement the functionality for <code>prefillAddress()</code> and use the
+    following button to try it out!
+    <button (click)="prefillAddress()">prefill address</button>
+  </li>
+  <li>
+    Adding validation to reactive forms is really easy. Take the
+    <code>firstName: [""]</code> for example. Adding
+    <code>Validators.required</code> to its defenition Array such that ["",
+    Validators.required] makes that FormControl required. Add the
+    <code>.required</code> validator to all elements you feel neccesary.
+    <ul>
+      <li>
+        Bonus: if you feel adventurous, add the
+        <code>Validator.pattern()</code> validator to the zip code. This
+        validator uses a
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"
+          >regular expression</a
+        >
+        to validate the string. This can be useful for e-mail addresses,
+        specially formated IDs and many more usecases.
+      </li>
+      <li>
+        Create a regular expression that matches two letters followed by a space
+        and five numbers. Use this regEx as the validator for the zip
+        formControl.
+      </li>
+      <li>
+        Test it using the following examples. The first two should validate, the
+        third should not. <code>NY 12345</code>, <code>CA 54321</code>,
+        <code>1245667</code>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h4>Bonus Exercise</h4>
+    This excercise is a bit more tricky. A person can be known under many
+    different names. In our form we would therefore like to capture all of these
+    <em>Aliases</em> using an <code>FormArray</code>, which can contain an
+    arbitrary number of entries.
+    <ul>
+      <li>
+        Add <code>alias</code> as a new property to the
+        <code>FormBuilder</code> which sets the <code>profileForm</code> and
+        initialize it as a FormArray which contains one FormControl:
+        <code>this.fb.array([this.fb.control("")])</code>
+      </li>
+      <li>
+        Implement the <code>get aliases()</code> function, which is already
+        present as a more convenient way to access all alias FormControls as a
+        FormArray. Make it return
+        <code>this.profileForm.get("aliases") as FormArray;</code> instead of
+        <code>null</code>
+      </li>
+      <li>
+        As we have an arbitary number of aliases, we need our template to adapt
+        to this. Have a look at how we used <code>ngFor</code> to show an
+        <code>input</code> for each entry and uncomment all the necessary code
+        inside the <code>app.component.html</code>
+      </li>
+      <li>
+        Right now our form only contains one alias. The goal of this exercise
+        was however to adapt it for multiple. We already have a button which
+        invokes the <code>addAlias()</code> method in the
+        <code>app.component.ts</code>. Use it to <code>.push()</code> a new
+        FormControl <code>this.fb.control("")</code> directly into
+        <code>this.aliases</code>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Now that all the pieces have come together, try them out!
+  </li>
 </ol>
 
 <!-- Insert Answer for Exercise 1.1 -->
 <div class="exercise">
-	<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-		<div>First Name:</div>
-		<input type="text" formControlName="firstName" />
+  <form (ngSubmit)="onSubmit()">
+    <div>First Name:</div>
+    <input type="text" />
 
-		<div>Last Name:</div>
-		<input type="text" formControlName="lastName" />
+    <div>Last Name:</div>
+    <input type="text" />
 
+    <div>
+      <h3>Address</h3>
+      <span></span> <span></span> <span></span>
 
-		<div formGroupName="address">
-			<h3>Address</h3>
-			<span></span> <span></span> <span></span>
+      <div>Street:</div>
+      <input type="text" />
 
-			<div>Street:</div>
-			<input type="text" formControlName="street" />
+      <div>City:</div>
+      <input type="text" />
 
+      <div>State:</div>
+      <input type="text" />
 
-			<div>City:</div>
-			<input type="text" formControlName="city" />
+      <div>Zip Code:</div>
+      <input type="text" />
+    </div>
 
-			<div>State:</div>
-			<input type="text" formControlName="state" />
-
-
-			<div>Zip Code:</div>
-			<input type="text" formControlName="zip" />
-		</div>
-
-			<div formArrayName="aliases">
+    <!-- Exercise 6  -->
+    <!-- <div formArrayName="aliases">
 				<h3>Aliases</h3>
 				<button type="button" (click)="addAlias()">Add Alias</button>
 				<div *ngFor="let alias of aliases.controls; let i=index">
 					<span>Alias:</span>
 					<input type="text" [formControlName]="i" />
 
+    </div> 
+
+				</div>-->
+
+    <div>
+      <span>Form Status: {{ profileForm.status }}</span>
+      <button type="submit" [disabled]="!profileForm.valid">Submit form</button>
     </div>
-
-				</div>
-
-				<div>
-					<span>Form Status: {{ profileForm.status }}</span>
-					<button type="submit" [disabled]="!profileForm.valid">Submit form</button>
-				</div>
-	</form>
+  </form>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+// 2.
+// import { FormBuilder, Validators } from "@angular/forms";
 import { FormArray } from "@angular/forms";
 
 @Component({
@@ -8,41 +9,58 @@ import { FormArray } from "@angular/forms";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  profileForm = this.fb.group({
-    firstName: ["", Validators.required],
-    lastName: [""],
-    address: this.fb.group({
-      street: [""],
-      city: [""],
-      state: [""],
-      zip: [""]
-    }),
-    aliases: this.fb.array([this.fb.control("")])
-  });
+
+  profileForm = null
+  // 3. 
+  // // define profile form as a FormGroup using the FormBuilder
+  // // the following object might come in handy
+  // this.fb.group({
+  //   firstName: [""],
+  //   lastName: [""],
+  //   address: this.fb.group({
+  //     street: [""],
+  //     city: [""],
+  //     state: [""],
+  //     zip: [""]
+  //   }),
+  //   // 6.
+  //   // define aliases as a FormArray which contains one FormControl
+  // });
 
   // Constructor
-  constructor(private fb: FormBuilder) {}
+
+  constructor(
+    // 2.
+    // inject the form builder into the component
+    // private fb: FormBuilder
+    ) {}
 
   onSubmit() {
     alert(JSON.stringify(this.profileForm.value));
   }
 
   get aliases() {
-    return this.profileForm.get("aliases") as FormArray;
+    // 6.
+    return null
   }
 
   addAlias() {
-    this.aliases.push(this.fb.control(""));
+    // 6.
+    // push a new form control to this.aliases
+    // the form control could be this.fb.control("")
   }
 
   prefillAddress() {
-    this.profileForm.patchValue({
-      address: {
-        street: "Sesame Street",
-        city: "New York",
-        zip: "10023",
-        state: "New York"
-      }
-    });
+    // 5. 
+    // Prefill the address using .patchValue()
+    // and the following object:
+    // {
+    //   address: {
+    //     street: "Sesame Street",
+    //     city: "New York",
+    //     zip: "10023",
+    //     state: "New York"
+    //   }
+    // }
   }
 }
