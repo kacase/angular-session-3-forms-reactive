@@ -9,9 +9,8 @@ import { FormArray } from "@angular/forms";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-
-  profileForm = null
-  // 3. 
+  profileForm = null;
+  // 3.
   // // define profile form as a FormGroup using the FormBuilder
   // // the following object might come in handy
   // this.fb.group({
@@ -23,17 +22,16 @@ export class AppComponent {
   //     state: [""],
   //     zip: [""]
   //   }),
-  //   // 6.
+  //   // 7.
   //   // define aliases as a FormArray which contains one FormControl
   // });
 
   // Constructor
 
-  constructor(
-    // 2.
-    // inject the form builder into the component
-    // private fb: FormBuilder
-    ) {}
+  constructor() // 2.
+  // inject the form builder into the component
+  // private fb: FormBuilder
+  {}
 
   onSubmit() {
     alert(JSON.stringify(this.profileForm.value));
@@ -41,17 +39,17 @@ export class AppComponent {
 
   get aliases() {
     // 6.
-    return null
+    return null;
   }
 
   addAlias() {
-    // 6.
+    // 7.
     // push a new form control to this.aliases
     // the form control could be this.fb.control("")
   }
 
   prefillAddress() {
-    // 5. 
+    // 5.
     // Prefill the address using .patchValue()
     // and the following object:
     // {
