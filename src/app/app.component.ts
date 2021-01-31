@@ -56,7 +56,7 @@ export class AppComponent {
     //   address: {
     //     street: "Sesame Street",
     //     city: "New York",
-    //     zip: "10023",
+    //     zip: "NY 10023",
     //     state: "New York"
     //   }
     // }
