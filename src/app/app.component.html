@@ -92,9 +92,21 @@
         <code>this.fb.array([this.fb.control("")])</code>
       </li>
       <li>
-        Implement the <code>get aliases()</code> function, which is already
-        present as a more convenient way to access all alias FormControls as a
-        FormArray. Make it return
+        In order to show an input for each alias the user might want to enter,
+        we need to access all the form controls that are currently present in
+        the form. The <code>profileForm.get("aliases")</code> function allows us
+        to access whatever form element resides behind the
+        <code>"aliases"</code> name. The value this call returns coulud however
+        be a <code>FormGroup</code>, a <code>FormControl</code> or a
+        <code>FormArray</code>; either of them is possible. Iteration over all
+        the elements is however only possible inside a <code>FormArray</code> we
+        therefore need to tell TypeScript explicitly, that the element we expect
+        is indeed a <code>FormArray</code>. As we will need to access the array
+        at multiple points inside our app, it makes sense to wrap it inside an
+        easily accessible function. Implement the
+        <code>get aliases()</code> function, which is already present as a more
+        convenient way to access all alias FormControls as a FormArray. Make it
+        return
         <code>this.profileForm.get("aliases") as FormArray;</code> instead of
         <code>null</code>
       </li>
@@ -110,7 +122,8 @@
         invokes the <code>addAlias()</code> method in the
         <code>app.component.ts</code>. Use it to <code>.push()</code> a new
         FormControl <code>this.fb.control("")</code> directly into
-        <code>this.aliases</code>
+        <code>this.aliases</code>. This allows users to add a new alias form
+        field one click at a time.
       </li>
     </ul>
   </li>
