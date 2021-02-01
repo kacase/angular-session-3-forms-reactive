@@ -28,10 +28,12 @@ export class AppComponent {
 
   // Constructor
 
-  constructor() // 2.
-  // inject the form builder into the component
+  // constructor(
+  // // 2.
+  // // inject the form builder into the component
   // private fb: FormBuilder
-  {}
+  // )
+  // {}
 
   onSubmit() {
     alert(JSON.stringify(this.profileForm.value));
